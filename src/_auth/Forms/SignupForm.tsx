@@ -12,6 +12,7 @@ import { SignupValidation } from "@/lib/validation";
 
 const SignupForm = () => {
   
+  const isLoading = true;
   
    const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -96,7 +97,15 @@ const SignupForm = () => {
             )}
           />  
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="shad-button_primary">
+            {isLoading ? (
+              <div className="flex-center gap-2">
+                  Loading...
+              </div>
+            ) : (
+              "Sign Up"
+            )}
+          </Button>
         </form>
       </div>
     </Form>
