@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-
 import {useForm} from 'react-hook-form';
 
 import { Button } from "@/components/ui/button"
@@ -11,6 +10,10 @@ import { Input } from "@/components/ui/input"
 import { SignupValidation } from "@/lib/validation";
 import Loader from "@/components/Shared/Loader";
 import { Link } from "react-router-dom";
+import { createUserAccount } from "@/lib/appwrite/api";
+
+
+
 
 const SignupForm = () => {
   
@@ -29,6 +32,7 @@ const SignupForm = () => {
   
   async function onSubmit(values: z.infer<typeof SignupValidation>) {
     const newUser = await createUserAccount(values)
+    console.log(newUser)
   }
 
   return (
@@ -92,7 +96,7 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Name" type="password" className="shad-input" {...field} />
+                  <Input placeholder="Password" type="password" className="shad-input" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
