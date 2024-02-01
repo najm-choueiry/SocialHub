@@ -12,11 +12,12 @@ import Loader from "@/components/Shared/Loader";
 import { Link } from "react-router-dom";
 import { createUserAccount } from "@/lib/appwrite/api";
 
+import { useToast } from "@/components/ui/use-toast";
 
 
 
 const SignupForm = () => {
-  
+  const {toast} = useToast()
   const isLoading = false;
   
    const form = useForm<z.infer<typeof SignupValidation>>({
@@ -33,7 +34,9 @@ const SignupForm = () => {
   async function onSubmit(values: z.infer<typeof SignupValidation>) {
     const newUser = await createUserAccount(values)
     if (!newUser) {
-      return ;
+      return toast({
+        title: "Sign up failed. Please try again"
+      })
     }
   }
 
