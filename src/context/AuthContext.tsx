@@ -1,4 +1,5 @@
 import {createContext, useContext, useEffect, useState} from 'react'
+import { IContextType, IUser } from '@/types'
 
 
 export const INITIAL_USER = {
@@ -20,11 +21,29 @@ const INITIAL_STATE = {
 }
 
 
-const AuthContext = createContext<IContextType>
+const AuthContext = createContext<IContextType>(INITIAL_STATE)
 
-const AuthContext = () => {
-  return (
-    <div>AuthContext</div>
+const AuthProvider = ({children}:{children.React.ReactNode}) => {
+    
+    const [user, setUser] = useState<IUser>(INITIAL_USER)
+    const [isLoading, setIsLoading] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+    const checkAuthUser = ()=> {}
+
+    const value = {
+        user,
+        setUser,
+        isLoading,
+        isAuthenticated,
+        setIsAuthenticated,
+        checkAuthUser
+    }
+
+    return (
+    <AuthContext.Provider value={value}>
+    {children}
+    </AuthContext.Provider>
   )
 }
 
