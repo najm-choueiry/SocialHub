@@ -1,14 +1,21 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../../public/assets/images/logo.svg'
 import Logout from '../../../public/assets/icons/logout.svg'
 import { Button } from '../ui/button'
 import { useSignOutAccount } from '@/lib/react-query/queryAndMutations'
+import { useEffect } from 'react'
 
 
 const Topbar = () => {
 
     const {mutate: signOut, isSuccess} = useSignOutAccount()
+    const navigate = useNavigate()
 
+    useEffect(()=>{
+        if(isSuccess){  
+            navigate(0)
+        }
+    },[isSuccess])
   return (    
     <section className='topbar'>
         <div className="flex-between py-4 px-5">
