@@ -23,7 +23,7 @@ export const useSignInAccount = () => {
 
 
 // Sigin out
-export const useSignOut = () => {
+export const useSignOutAccount = () => {
 
     return useMutation({
         mutationFn: signOutAccount

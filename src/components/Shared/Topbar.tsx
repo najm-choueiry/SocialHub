@@ -2,9 +2,13 @@ import { Link } from 'react-router-dom'
 import Logo from '../../../public/assets/images/logo.svg'
 import Logout from '../../../public/assets/icons/logout.svg'
 import { Button } from '../ui/button'
+import { useSignOutAccount } from '@/lib/react-query/queryAndMutations'
 
 
 const Topbar = () => {
+
+    const {mutate: signOut, isSuccess} = useSignOutAccount()
+
   return (    
     <section className='topbar'>
         <div className="flex-between py-4 px-5">
@@ -20,7 +24,7 @@ const Topbar = () => {
                 <Button 
                     variant="ghost" 
                     className='shad-button_ghost' 
-                    onClick={signOut}
+                    onClick={()=>signOut()}
                 >
                     <img 
                         src={Logout}
