@@ -9,10 +9,11 @@ import {Form,FormControl,FormField,FormItem,FormLabel,FormMessage,
 import { Input } from "@/components/ui/input"
 import { SignupValidation } from "@/lib/validation";
 import Loader from "@/components/Shared/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useToast } from "@/components/ui/use-toast";
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queryAndMutations";
+import { useUserContext } from "@/context/AuthContext";
 
 
 
@@ -21,6 +22,10 @@ const SignupForm = () => {
 
   const { mutateAsync: createUserAccount , isLoading: isCreatingUser} = useCreateUserAccount()
   const { mutateAsync: signInAccount , isLoading: isSigningIn} = useSignInAccount()
+
+  const {checkAuthUser, isLoading: isUserLoading} = useUserContext()  
+
+  const navigate = useNavigate()
 
    const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -44,12 +49,21 @@ const SignupForm = () => {
       email: values.email,
       password: values.password
     })
-
+  
     if (!session) {
       return toast({
         title: "Sign in failed. Please try again"
       })
-      
+    }
+      const isLoaggedIn = await checkAuthUser();
+      if (isLoaggedIn) {
+        form.reset();
+        navigate('/')
+      } else{
+        return toast({
+          title: "Sign up failed. Please try again"
+        })
+      }
   }
 
   return (
@@ -138,5 +152,5 @@ const SignupForm = () => {
     </Form>
   )
 }
-}
+
 export default SignupForm
