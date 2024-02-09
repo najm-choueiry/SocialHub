@@ -53,7 +53,8 @@ const LeftSideBar = () => {
           {sidebarLinks.map((link: INavLink) => {
             return (
               <li className="leftsidebar-link" key={link.label}>
-                <NavLink to={link.route} >
+                <NavLink to={link.route} className="flex gap-4 items-center p-4">
+                  <img src={link.imgURL} alt={link.label} className='group-hover: invert-white'/>
                   {link.label}
                 </NavLink>
               </li>
