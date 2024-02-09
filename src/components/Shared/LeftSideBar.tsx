@@ -1,10 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import Logo from '../../../public/assets/images/logo.svg'
 import Logout from '../../../public/assets/icons/logout.svg'
 import { Button } from '../ui/button'
 import { useSignOutAccount } from '@/lib/react-query/queryAndMutations'
 import {useEffect } from 'react'
 import { useUserContext } from '@/context/AuthContext'
+import { sidebarLinks } from '@/constants'
+import { INavLink } from '@/types'
 
 
 const LeftSideBar = () => {
@@ -48,7 +50,15 @@ const LeftSideBar = () => {
           </div>
         </Link>
         <ul className='flex flex-col gap-6'>
-          
+          {sidebarLinks.map((link: INavLink) => {
+            return (
+              <li className="leftsidebar-link" key={link.label}>
+                <NavLink to={link.route} >
+                  {link.label}
+                </NavLink>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </nav>
