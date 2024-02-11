@@ -8,7 +8,6 @@ import { useUserContext } from '@/context/AuthContext'
 import { sidebarLinks } from '@/constants'
 import { INavLink } from '@/types'
 
-
 const LeftSideBar = () => {
 
     const {mutate: signOut, isSuccess} = useSignOutAccount()
