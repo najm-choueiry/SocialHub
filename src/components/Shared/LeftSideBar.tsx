@@ -1,12 +1,12 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import Logo from '../../../public/assets/images/logo.svg'
-import Logout from '../../../public/assets/icons/logout.svg'
-import { Button } from '../ui/button'
 import { useSignOutAccount } from '@/lib/react-query/queryAndMutations'
 import {useEffect } from 'react'
 import { useUserContext } from '@/context/AuthContext'
 import { sidebarLinks } from '@/constants'
 import { INavLink } from '@/types'
+import { Button } from '../ui/button'
+import Logout from '../../../public/assets/icons/logout.svg'
+
 
 const LeftSideBar = () => {
 
@@ -67,6 +67,17 @@ const LeftSideBar = () => {
           })}
         </ul>
       </div>
+      <Button 
+          variant="ghost" 
+          className='shad-button_ghost' 
+          onClick={()=>signOut()}
+      >
+          <img 
+              src={Logout}
+              alt="logout"
+          />
+          <p className='small-medium lg:base-medium'>Logout</p>
+      </Button>
     </nav>
   )
 }
