@@ -32,10 +32,16 @@ export const useSignOutAccount = () => {
 
 
 
-// Sigin out
+// CREATE POST
 export const useCreatePost = () => {
-
+    const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: signOutAccount
-    })
-}
+      mutationFn: (post: INewPost) => createPost(post),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+        });
+      },
+    });
+  };
+  
