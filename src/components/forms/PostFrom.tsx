@@ -5,24 +5,23 @@ import * as z from 'zod'
 import { Button} from '@/components/ui/button'
 
 import {
-    Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage
+    Form, FormControl, FormField, FormItem, FormLabel, FormMessage
 } from '@/components/ui/form'
 
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import FileUploader from "../Shared/FileUploader"
+import { PostValidation } from "@/lib/validation"
+import { Models } from "appwrite"
 
+type PostFormProps = {
+    post? : Models.Document
+}
 
-const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Username must be at leart 2 characters",
-    })
-})
+const PostFrom = ({post}: PostFormProps) => {
 
-const PostFrom = ({post}) => {
-
-   const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+   const form = useForm<z.infer<typeof PostValidation>>({
+        resolver: zodResolver(PostValidation),
         defaultValues: {
             caption: post ? post?.caption : "",
             file: [],
@@ -31,7 +30,7 @@ const PostFrom = ({post}) => {
         }
    }) 
 
-   function onSubmit(values: z.infer<typeof formSchema>) {
+   function onSubmit(values: z.infer<typeof PostValidation>) {
 
    }
 
@@ -77,7 +76,11 @@ const PostFrom = ({post}) => {
                 <FormItem>
                 <FormLabel className="shad-form_label">Add Location</FormLabel>
                 <FormControl>
-                    <Input type="text" className="shad-input" />
+                    <Input 
+                        type="text" 
+                        className="shad-input" 
+                        {...field}
+                    />
                 </FormControl>
                 <FormMessage className="shad-form_message"/>
                 </FormItem>
@@ -95,6 +98,7 @@ const PostFrom = ({post}) => {
                         type="text"
                         className="shad-input"
                         placeholder="Art, Expression, Learn"
+                        {...field}
                     />
                 </FormControl>
                 <FormMessage className="shad-form_message"/>

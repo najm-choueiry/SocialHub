@@ -17,7 +17,7 @@ export const SignupValidation = z.object({
   
 // POST VALIDATION
 export const PostValidation = z.object({
-  email: z.string().min(5).max(2200),
+  caption: z.string().min(5).max(2200),
   file: z.custom<File[]>(),
   location: z.string().min(2).max(100),
   tags: z.string()
