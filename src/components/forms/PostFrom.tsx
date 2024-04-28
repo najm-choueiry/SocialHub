@@ -19,7 +19,7 @@ const formSchema = z.object({
     })
 })
 
-const PostFrom = () => {
+const PostFrom = ({post}) => {
 
    const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -57,7 +57,10 @@ const PostFrom = () => {
                 <FormItem>
                 <FormLabel className="shad-form_label">Add Photos</FormLabel>
                 <FormControl>
-                    <FileUploader />
+                    <FileUploader 
+                        fieldChange={field.onChange}
+                        mediaUrl={post?.imageUrl}
+                    />
                 </FormControl>
                 <FormMessage className="shad-form_message"/>
                 </FormItem>
