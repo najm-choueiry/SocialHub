@@ -10,6 +10,8 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import FileUploader from "../Shared/FileUploader"
+
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -61,6 +63,39 @@ const PostFrom = () => {
             </FormItem>
           )}
         />
+
+    <FormField
+          control={form.control}
+          name="location"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="shad-form_label">Caption</FormLabel>
+              <FormControl>
+                <Input type="text" className="shad-input" />
+              </FormControl>
+              <FormMessage className="shad-form_message"/>
+            </FormItem>
+          )}
+        />
+
+    <FormField
+          control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="shad-form_label">Add tags (seperated by comma " , ")</FormLabel>
+              <FormControl>
+                <Input 
+                    type="text"
+                    className="shad-input"
+                    placeholder="Art, Expression, Learn"
+                />
+              </FormControl>
+              <FormMessage className="shad-form_message"/>
+            </FormItem>
+          )}
+        />
+
 
         <Button type="submit">Submit</Button>
       </form>
