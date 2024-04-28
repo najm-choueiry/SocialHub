@@ -29,3 +29,13 @@ export const useSignOutAccount = () => {
         mutationFn: signOutAccount
     })
 }
+
+
+
+// Sigin out
+export const useCreatePost = () => {
+
+    return useMutation({
+        mutationFn: signOutAccount
+    })
+}

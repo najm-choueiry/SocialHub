@@ -13,12 +13,15 @@ import { Textarea } from "@/components/ui/textarea"
 import FileUploader from "../Shared/FileUploader"
 import { PostValidation } from "@/lib/validation"
 import { Models } from "appwrite"
+import {useCreatePost} from '@/lib/react-query/queryAndMutations'
 
 type PostFormProps = {
     post? : Models.Document
 }
 
 const PostFrom = ({post}: PostFormProps) => {
+
+    const {mutateAsync: createPost , isPending: isLoadingCreate} = useCreatePost()
 
    const form = useForm<z.infer<typeof PostValidation>>({
         resolver: zodResolver(PostValidation),
@@ -31,7 +34,7 @@ const PostFrom = ({post}: PostFormProps) => {
    }) 
 
    function onSubmit(values: z.infer<typeof PostValidation>) {
-
+        console.log(values);
    }
 
    return (
